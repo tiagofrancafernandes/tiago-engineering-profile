@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-zinc-950 text-zinc-200">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiago França Fernandes</title>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        body { font-weight: 300; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200" x-data="pageData">
+
+<!-- Fixed Menu -->
+<header class="fixed top-0 left-0 w-full bg-zinc-950/80 backdrop-blur border-b border-zinc-800 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center text-sm">
+        <div class="font-semibold tracking-wide">
+            Tiago França Fernandes
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button 
+                @click="toggleLang" 
+                class="px-3 py-1 border border-zinc-700 rounded hover:bg-zinc-800 transition text-xs">
+                <span x-text="lang === 'en' ? 'PT' : 'EN'"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="pt-24 pb-20">
+
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+
+        <div>
+            <h1 class="text-4xl md:text-5xl font-thin mb-4 leading-tight">
+                <span x-show="lang === 'en'">Senior Backend Engineer</span>
+                <span x-show="lang === 'pt'">Engenheiro Backend Sênior</span>
+            </h1>
+
+            <p class="text-zinc-400 mb-6">
+                <span x-show="lang === 'en'">
+                    Backend specialist with broad technical vision. Over 10 years building scalable, secure and maintainable systems.
+                </span>
+                <span x-show="lang === 'pt'">
+                    Especialista em backend com visão técnica ampla. Mais de 10 anos construindo sistemas escaláveis, seguros e de fácil manutenção.
+                </span>
+            </p>
+
+            <div class="flex gap-4 text-xs">
+                <a href="https://github.com/tiagofrancafernandes" target="_blank" 
+                   class="px-4 py-2 border border-zinc-700 rounded hover:bg-zinc-800 transition">
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/tiago-php/" target="_blank"
+                   class="px-4 py-2 border border-zinc-700 rounded hover:bg-zinc-800 transition">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+
+        <div class="flex justify-center">
+            <img 
+                src="https://github.com/tiagofrancafernandes.png" 
+                alt="Profile" 
+                class="rounded-full w-48 h-48 border border-zinc-800 shadow-xl"
+            >
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="max-w-6xl mx-auto px-6 mt-20">
+        <h2 class="text-2xl font-thin mb-6">
+            <span x-show="lang === 'en'">About</span>
+            <span x-show="lang === 'pt'">Sobre</span>
+        </h2>
+
+        <p class="text-zinc-400 leading-relaxed max-w-3xl">
+            <span x-show="lang === 'en'">
+                Focused on backend architecture, API design, performance and system reliability. Strong experience with PHP, Laravel, Linux and PostgreSQL. Complementary knowledge in Node.js, Vue, Nuxt and modern frontend ecosystems.
+            </span>
+            <span x-show="lang === 'pt'">
+                Foco em arquitetura backend, design de APIs, performance e confiabilidade de sistemas. Forte experiência com PHP, Laravel, Linux e PostgreSQL. Conhecimentos complementares em Node.js, Vue, Nuxt e ecossistemas modernos de frontend.
+            </span>
+        </p>
+    </section>
+
+    <!-- Technologies -->
+    <section class="max-w-6xl mx-auto px-6 mt-20">
+        <h2 class="text-2xl font-thin mb-8">
+            <span x-show="lang === 'en'">Technologies</span>
+            <span x-show="lang === 'pt'">Tecnologias</span>
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <template x-for="tech in technologies" :key="tech.name">
+                <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span x-text="tech.name"></span>
+                        <span x-text="tech.level + '%'"></span>
+                    </div>
+                    <div class="w-full bg-zinc-800 h-2 rounded">
+                        <div 
+                            class="bg-blue-500 h-2 rounded transition-all duration-500"
+                            :style="`width: ${tech.level}%`">
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="max-w-6xl mx-auto px-6 mt-20">
+        <h2 class="text-2xl font-thin mb-6">
+            <span x-show="lang === 'en'">Experience</span>
+            <span x-show="lang === 'pt'">Experiência</span>
+        </h2>
+
+        <div class="space-y-6">
+
+            <template x-for="job in jobs" :key="job.company">
+                <div class="border-l border-zinc-800 pl-4">
+                    <h3 class="text-lg font-light" x-text="job.company"></h3>
+                    <p class="text-xs text-zinc-500" x-text="job.period"></p>
+                </div>
+            </template>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-zinc-800 py-6 text-center text-xs text-zinc-500">
+    <div class="mb-2">
+        <button @click="toggleLang" class="hover:text-white transition">
+            <span x-text="lang === 'en' ? 'Português' : 'English'"></span>
+        </button>
+    </div>
+    <div>
+        © <span x-text="new Date().getFullYear()"></span> Tiago França Fernandes
+    </div>
+</footer>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('pageData', () => ({
+        lang: 'en',
+
+        toggleLang() {
+            this.lang = this.lang === 'en' ? 'pt' : 'en'
+        },
+
+        technologies: [
+            { name: 'PHP', level: 90 },
+            { name: 'Laravel', level: 85 },
+            { name: 'Node.js', level: 70 },
+            { name: 'PostgreSQL', level: 70 },
+            { name: 'Vue.js / Nuxt', level: 70 },
+            { name: 'Linux', level: 80 },
+            { name: 'Docker', level: 70 },
+            { name: 'TailwindCSS', level: 80 },
+            { name: 'LLM / RAG', level: 60 }
+        ],
+
+        jobs: [
+            { company: 'F2 Sistemas e Ensino', period: '2023 - Present' },
+            { company: 'Grupo GPS', period: '2023' },
+            { company: 'Só Carrão', period: '2023' },
+            { company: 'Pontomais', period: '2019 - 2022' }
+        ]
+    }))
+})
+</script>
+
+</body>
+</html>
